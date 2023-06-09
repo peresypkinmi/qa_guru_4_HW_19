@@ -1,8 +1,8 @@
 import pytest
-from BaseSession.BaseSession import BaseSession
+from basesession.basesession import BaseSession
 import os
 from dotenv import load_dotenv
-from Steps.ApiSteps import ApiSteps
+from steps.apisteps import ApiSteps
 
 
 @pytest.fixture()

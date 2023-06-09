@@ -1,4 +1,4 @@
-from Steps.Step import Step
+from steps.step import Step
 
 
 class TestUsers:

@@ -1,4 +1,4 @@
-from Steps.UISteps import UISteps
+from steps.uisteps import UISteps
 
 
 class TestSw:

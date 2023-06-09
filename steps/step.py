@@ -2,9 +2,9 @@ from datetime import datetime
 import random
 
 from allure import step
-from Objects.User import User
+from objects.user import User
 from pytest_voluptuous import S
-from Models.UserModel import *
+from models.usermodel import *
 
 
 class Step:
