@@ -31,7 +31,8 @@ class Step:
         with step('create_new_user'):
             self.EXPECTED_DICT['name'] = 'test'
             self.EXPECTED_DICT['job'] = 'test'
-            user = User().create_user(name='test', job='test', req=self.req)
+            user = User()
+            user.create_user(name='test', job='test', req=self.req)
             self.ACTUAL_DICT['name'] = user.name
             self.ACTUAL_DICT['job'] = user.job
 
@@ -49,10 +50,10 @@ class Step:
 
     def get_total_page_parameter(self):
         with step('get_total_page_parameter'):
-            userList = User.get_user_list(self.req)
-            self.ACTUAL_DICT['total_pages'] = userList['total_pages']
-            self.ACTUAL_DICT['total'] = userList['total']
-            self.ACTUAL_DICT['per_page'] = userList['per_page']
+            user_list = User.get_user_list(self.req)
+            self.ACTUAL_DICT['total_pages'] = user_list['total_pages']
+            self.ACTUAL_DICT['total'] = user_list['total']
+            self.ACTUAL_DICT['per_page'] = user_list['per_page']
 
     def get_random_single_user_from_user_list(self):
         with step('get_random_single_user_from_user_list'):
@@ -74,7 +75,8 @@ class Step:
 
     def get_data_creating_user(self):
         with step('get_data_creating_user'):
-            user = User().create_user(req=self.req, job='test', name='test')
+            user = User()
+            user.create_user(req=self.req, job='test', name='test')
             self.ACTUAL_DICT['createdAt'] = user.createdAt[2:10]
 
     def get_token_after_register(self):
@@ -121,8 +123,8 @@ class Step:
             self.EXPECTED_DICT['createdAt'] = datetime.today().strftime('%y-%m-%d')
             assert self.ACTUAL_DICT['createdAt'] == self.EXPECTED_DICT['createdAt']
 
-    def assert_lenght_token(self):
-        with step('assert_lenght_token'):
+    def assert_token_length(self):
+        with step('assert_token_length'):
             assert len(self.ACTUAL_DICT['token']) == 17
 
     def assert_error_message(self):

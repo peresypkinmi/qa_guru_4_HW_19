@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from requests import Request, Response
 
 
 @dataclass()
@@ -12,23 +11,25 @@ class User:
     @staticmethod
     def get_user_list(req, page=1):
         req.params['page'] = page
-        return  req.get('users').json()
-
+        return req.get('users').json()
 
     @staticmethod
-    def get_single_user(req, id: str):
-        req.params['id'] = id
-        s = req.get('users').json()
-        return s
+    def get_single_user(req, user_id: str):
+        req.params['id'] = user_id
+        return req.get('users').json()
 
     def create_user(self, job: str, name: str, req):
         req.json = {'job': job,
                     'name': name}
 
         data_user = req.post('users').json()
-        return User(data_user['id'], data_user['name'], data_user['job'], data_user['createdAt'])
+        self.id = data_user['id']
+        self.name = data_user['name']
+        self.job = data_user['job']
+        self.createdAt = data_user['createdAt']
 
-    def register_user_without_pass(self, req):
+    @staticmethod
+    def register_user_without_pass(req):
         req.json = {"email": "eve.holt@reqres.in"}
         data_user = req.post('register')
         return data_user
@@ -38,9 +39,9 @@ class User:
         req.params['page'] = page
         return req.get('users').status_code
 
-    def register_user(self, req):
+    @staticmethod
+    def register_user(req):
         req.json = {"email": "eve.holt@reqres.in",
-                        "password": "pistol"}
+                    "password": "pistol"}
         data_user = req.post('register').json()
         return data_user
-

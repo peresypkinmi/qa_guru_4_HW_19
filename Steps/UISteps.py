@@ -3,7 +3,6 @@ from selene import be, have
 from allure import step
 
 
-
 class UISteps:
 
     def __init__(self):
@@ -15,9 +14,9 @@ class UISteps:
             browser.open('https://kz.siberianwellness.com/kz-ru/favico.ico')
             browser.driver.add_cookie({'name': 'token', 'value': token})
             browser.open("https://kz.siberianwellness.com/kz-ru/")
-            return UISteps()
+            return self
 
     def check_user_name(self):
         with step('check_user_name'):
             browser.element('[data-qa=VUSERBAR_NAME]').should(be.visible).should(have.exact_text('Testyyui Testeeoi'))
-            return UISteps()
+            return self
